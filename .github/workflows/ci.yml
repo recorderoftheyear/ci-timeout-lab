@@ -12,6 +12,7 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
 
     steps:
       - name: Checkout repository
@@ -29,3 +30,9 @@ jobs:
       - name: Validate application
         working-directory: app
         run: npm test
+
+      - name: Controlled long-running validation
+        run: | 
+          echo "Starting controlled timeout validation"
+          sleep 150
+          echo "Controlled validation completed"
